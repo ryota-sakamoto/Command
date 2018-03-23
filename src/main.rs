@@ -132,10 +132,10 @@ fn ls(options: &Options) {
 
     let mut result = String::new();
     for file in files {
-        if options.is_show_line {
-            result += &format!("{} ", file.modified.format("mm dd h:i"));
-        }
         if options.is_show_all || !file.name.starts_with(".") {
+            if options.is_show_line {
+                result += &format!("{} ", file.modified.format("mm dd h:i"));
+            }
             result += &format!("{}{}", file.name, end);
         }
     }
