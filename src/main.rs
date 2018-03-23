@@ -16,6 +16,7 @@ struct FileDetail {
     modified: Time,
 }
 
+#[derive(Debug)]
 struct Time {
     year: u64,
     month: u64,
@@ -26,6 +27,8 @@ struct Time {
 }
 
 impl Time {
+
+    // TODO fix
     fn parse_sec(unixtime: u64) -> Time {
         let months = vec![31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -63,6 +66,17 @@ impl Time {
             .replace("s", &format!("{}", self.seconds))
             .to_string()
     }
+}
+
+#[test]
+fn parse_sec_test() {
+    let time1 = Time::parse_sec(1000000000);
+    assert_eq!(time1.year, 2001);
+    assert_eq!(time1.month, 9);
+    assert_eq!(time1.day, 9);
+    assert_eq!(time1.hour, 1);
+    assert_eq!(time1.minutes, 46);
+    assert_eq!(time1.seconds, 40);
 }
 
 fn main() {
